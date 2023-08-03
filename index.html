@@ -173,14 +173,16 @@
             currentTimer = setTimeout(() => { hideMessage(localindiceActual); }, 1);
         }
 
-        function slideLeft() {
+        function slideLeft(directorioFotos, indiceActual) {
+            console.log("slideLeft...")
             indiceActual = (indiceActual - 1 + 7) % 7;
-            updateScene();
+            updateScene(directorioFotos, indiceActual);
         }
 
-        function slideRight() {
+        function slideRight(directorioFotos, indiceActual) {
+            console.log("slideRight...")
             indiceActual = (indiceActual + 1) % 7;
-            updateScene();
+            updateScene(directorioFotos, indiceActual);
         }
 
         function showMessage() {
@@ -191,24 +193,24 @@
             // document.getElementById('message' + indiceActual).setAttribute('class', 'hide')
         }
 
-        var indiceActual = 1;
+        //DEFAULTS
         var isShowMessage = true;
         var currentTimer = null;
+        var indiceActual = 1;
+        var directorioFotos = `${directorioBase}` + `/fotos/madrid/`
 
         // document.getElementById('left').onclick = slideLeft;
-        document.getElementById('left-overlay').onclick = slideLeft;
+        document.getElementById('left-overlay').onclick = slideLeft(directorioFotos, indiceActual);
 
         // document.getElementById('right').onclick = slideRight;
-        document.getElementById('right-overlay').onclick = slideRight;
+        document.getElementById('right-overlay').onclick = slideRight(directorioFotos, indiceActual);
 
         //DIRECTORIO PADRE
         var url = window.location.href;
         var path = window.location.pathname;
         var directorioBase = path.substring(0, path.lastIndexOf('/'));
-        console.log("directorioBase: " + directorioBase)
 
-        //DIRECTORIOS DE FOTOS
-        directorioFotos = `${directorioBase}` + `/fotos/madrid/`
+        console.log("directorioBase: " + directorioBase)
         console.log("directorioFotos: " + directorioFotos)
 
         updateScene(directorioFotos, indiceActual);
