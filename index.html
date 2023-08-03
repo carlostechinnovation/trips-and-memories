@@ -46,7 +46,7 @@
 <body>
 
     <a-scene>
-        <a-sky id="sky" src="1.jpeg" rotation="0 0 0">
+        <a-sky id="sky" src="0.jpeg" rotation="0 0 0">
             <a-animation attribute="rotation" fill="forwards" easing="linear" dur="30000" from="0 0 0" to="0 360 0"
                 repeat="indefinite"></a-animation>
 
@@ -152,39 +152,38 @@
 
 
     <script>
-        var currentIndex = 3;
+        var indiceActual = 1;
         var isShowMessage = true;
         var currentTimer = null;
 
-        function updateScene() {
+        function updateScene(pathFoto) {
             // clearTimeout(currentTimer)
             var sky = document.getElementById('sky')
-            console.log(currentIndex)
-            sky.setAttribute("src", `${currentIndex}.jpeg`)
+
+            console.log("indiceActual: " + indiceActual)
+            sky.setAttribute("src", `fotos\madrid\${indiceActual}.jpeg`)
             // console.log(sky)
-            var localCurrentIndex = currentIndex
-            showMessage(localCurrentIndex);
-            currentTimer = setTimeout(() => {
-                hideMessage(localCurrentIndex);
-            }, 4);
+            var localindiceActual = indiceActual
+            showMessage(localindiceActual);
+            currentTimer = setTimeout(() => { hideMessage(localindiceActual); }, 1);
         }
 
         function slideLeft() {
-            currentIndex = (currentIndex - 1 + 7) % 7;
+            indiceActual = (indiceActual - 1 + 7) % 7;
             updateScene();
         }
 
         function slideRight() {
-            currentIndex = (currentIndex + 1) % 7;
+            indiceActual = (indiceActual + 1) % 7;
             updateScene();
         }
 
         function showMessage() {
-            document.getElementById('message' + currentIndex).setAttribute('class', 'message show animated fadeOut')
+            document.getElementById('message' + indiceActual).setAttribute('class', 'message show animated fadeOut')
         }
 
         function hideMessage() {
-            // document.getElementById('message' + currentIndex).setAttribute('class', 'hide')
+            // document.getElementById('message' + indiceActual).setAttribute('class', 'hide')
         }
 
         // document.getElementById('left').onclick = slideLeft;
