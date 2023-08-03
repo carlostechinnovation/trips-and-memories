@@ -156,6 +156,7 @@
 
     <script>
         function updateScene(directorioFotos, indiceActual) {
+            console.log("updateScene...")
 
             // clearTimeout(currentTimer)
             var sky = document.getElementById('sky')
@@ -177,12 +178,14 @@
             console.log("slideLeft...")
             indiceActual = (indiceActual - 1 + 7) % 7;
             updateScene(directorioFotos, indiceActual);
+            window.indiceActual = indiceActual; // Update the global variable
         }
 
         function slideRight(directorioFotos, indiceActual) {
             console.log("slideRight...")
             indiceActual = (indiceActual + 1) % 7;
             updateScene(directorioFotos, indiceActual);
+            window.indiceActual = indiceActual; // Update the global variable
         }
 
         function showMessage() {
@@ -207,16 +210,14 @@
         console.log("directorioFotos: " + directorioFotos)
 
         // document.getElementById('left').onclick = slideLeft;
-        document.getElementById('left-overlay').onclick = slideLeft(directorioFotos, indiceActual);
+        document.getElementById('left-overlay').onclick = function () { slideLeft(directorioFotos, indiceActual); };
 
         // document.getElementById('right').onclick = slideRight;
-        document.getElementById('right-overlay').onclick = slideRight(directorioFotos, indiceActual);
+        document.getElementById('right-overlay').onclick = function () { slideRight(directorioFotos, indiceActual); };
 
 
 
-
-
-
+        //INICIO DEL MOVIMIENTO
         updateScene(directorioFotos, indiceActual);
     </script>
 
