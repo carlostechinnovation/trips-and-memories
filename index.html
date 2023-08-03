@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>MI VISIÓN</title>
-    <meta name="Mi vision" content="Imagen">
+    <title>TRIPS AND MEMORIES</title>
+    <meta name="Trips and memories" content="Imagen">
     <script src="aframe-v0.8.2.min.js"></script>
     <link rel="stylesheet" href="animate.css">
 
@@ -41,13 +41,73 @@
         }
     </style>
 
+    <script>
+        function updateScene(directorioFotos, indiceActual) {
+
+            // clearTimeout(currentTimer)
+            var sky = document.getElementById('sky')
+
+            console.log("indiceActual: " + indiceActual)
+
+            pathFoto = `${directorioFotos}` + `${indiceActual}` + `.jpeg`
+            console.log("pathFoto: " + pathFoto)
+            sky.setAttribute("src", pathFoto)
+
+            var localindiceActual = indiceActual
+
+            //MENSAJE AL USUARIO EN LA PANTALLA
+            showMessage(localindiceActual);
+            currentTimer = setTimeout(() => { hideMessage(localindiceActual); }, 1);
+        }
+
+        function slideLeft() {
+            indiceActual = (indiceActual - 1 + 7) % 7;
+            updateScene();
+        }
+
+        function slideRight() {
+            indiceActual = (indiceActual + 1) % 7;
+            updateScene();
+        }
+
+        function showMessage() {
+            document.getElementById('message' + indiceActual).setAttribute('class', 'message show animated fadeOut')
+        }
+
+        function hideMessage() {
+            // document.getElementById('message' + indiceActual).setAttribute('class', 'hide')
+        }
+
+        var indiceActual = 1;
+        var isShowMessage = true;
+        var currentTimer = null;
+
+        // document.getElementById('left').onclick = slideLeft;
+        document.getElementById('left-overlay').onclick = slideLeft;
+
+        // document.getElementById('right').onclick = slideRight;
+        document.getElementById('right-overlay').onclick = slideRight;
+
+        //DIRECTORIO PADRE
+        var url = window.location.href;
+        var path = window.location.pathname;
+        var directorioBase = path.substring(0, path.lastIndexOf('/'));
+        console.log("directorioBase: " + directorioBase)
+
+        //DIRECTORIOS DE FOTOS
+        directorioFotos = `${directorioBase}` + `/fotos/madrid/`
+        console.log("directorioFotos: " + directorioFotos)
+
+        updateScene(directorioFotos, indiceActual);
+    </script>
+
 </head>
 
 <body>
 
     <a-scene>
-        <a-sky id="sky" src="0.jpeg" rotation="0 0 0">
-            <a-animation attribute="rotation" fill="forwards" easing="linear" dur="30000" from="0 0 0" to="0 360 0"
+        <a-sky id="sky" src="fotos/inicio.jpg" rotation="0 0 0">
+            <a-animation attribute="rotation" fill="forwards" easing="linear" dur="25000" from="0 0 0" to="0 360 0"
                 repeat="indefinite"></a-animation>
 
             <!-- May be stop animation in this way: https://github.com/aframevr/aframe/issues/2157 -->
@@ -150,64 +210,6 @@
         <p>Foto 6</p>
     </div>
 
-
-    <script>
-        var indiceActual = 1;
-        var isShowMessage = true;
-        var currentTimer = null;
-
-        function updateScene(directorioFotos) {
-
-            // clearTimeout(currentTimer)
-            var sky = document.getElementById('sky')
-
-            console.log("indiceActual: " + indiceActual)
-
-            pathFoto = `${directorioFotos}` + `${indiceActual}` + `.jpeg`
-            console.log("pathFoto: " + pathFoto)
-            sky.setAttribute("src", pathFoto)
-            // console.log(sky)
-            var localindiceActual = indiceActual
-            showMessage(localindiceActual);
-            currentTimer = setTimeout(() => { hideMessage(localindiceActual); }, 1);
-        }
-
-        function slideLeft() {
-            indiceActual = (indiceActual - 1 + 7) % 7;
-            updateScene();
-        }
-
-        function slideRight() {
-            indiceActual = (indiceActual + 1) % 7;
-            updateScene();
-        }
-
-        function showMessage() {
-            document.getElementById('message' + indiceActual).setAttribute('class', 'message show animated fadeOut')
-        }
-
-        function hideMessage() {
-            // document.getElementById('message' + indiceActual).setAttribute('class', 'hide')
-        }
-
-        // document.getElementById('left').onclick = slideLeft;
-        document.getElementById('left-overlay').onclick = slideLeft;
-
-        // document.getElementById('right').onclick = slideRight;
-        document.getElementById('right-overlay').onclick = slideRight;
-
-        //DIRECTORIO PADRE
-        var url = window.location.href;
-        var path = window.location.pathname;
-        var directorioBase = path.substring(0, path.lastIndexOf('/'));
-        console.log("directorioBase: " + directorioBase)
-
-        //DIRECTORIOS DE FOTOS
-        directorioFotos = `${directorioBase}` + `/fotos/madrid/`
-        console.log("directorioFotos: " + directorioFotos)
-
-        updateScene(directorioFotos);
-    </script>
 </body>
 
 </html>
