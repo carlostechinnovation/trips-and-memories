@@ -157,11 +157,20 @@
         var currentTimer = null;
 
         function updateScene(pathFoto) {
+
+            var url = window.location.href;
+            var path = window.location.pathname;
+            var directorioBase = path.substring(0, path.lastIndexOf('/'));
+            console.log("directorioBase: " + directorioBase)
+            document.getElementById('output').innerHTML = `URL: ${url}<br>directorioBase: ${directorioBase}`;
+
             // clearTimeout(currentTimer)
             var sky = document.getElementById('sky')
+            pathFoto = `${directorioBase}` + `fotos\\madrid\\` + `${indiceActual}` + `.jpeg`
 
             console.log("indiceActual: " + indiceActual)
-            sky.setAttribute("src", "fotos\\madrid\\${indiceActual}.jpeg")
+            console.log("pathFoto: " + pathFoto)
+            sky.setAttribute("src", pathFoto)
             // console.log(sky)
             var localindiceActual = indiceActual
             showMessage(localindiceActual);
