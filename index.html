@@ -193,11 +193,18 @@
             // document.getElementById('message' + indiceActual).setAttribute('class', 'hide')
         }
 
+        //DIRECTORIO PADRE
+        var url = window.location.href;
+        var path = window.location.pathname;
+        var directorioBase = path.substring(0, path.lastIndexOf('/'));
+        console.log("directorioBase: " + directorioBase)
+
         //DEFAULTS
         var isShowMessage = true;
         var currentTimer = null;
         var indiceActual = 1;
         var directorioFotos = `${directorioBase}` + `/fotos/madrid/`
+        console.log("directorioFotos: " + directorioFotos)
 
         // document.getElementById('left').onclick = slideLeft;
         document.getElementById('left-overlay').onclick = slideLeft(directorioFotos, indiceActual);
@@ -205,13 +212,10 @@
         // document.getElementById('right').onclick = slideRight;
         document.getElementById('right-overlay').onclick = slideRight(directorioFotos, indiceActual);
 
-        //DIRECTORIO PADRE
-        var url = window.location.href;
-        var path = window.location.pathname;
-        var directorioBase = path.substring(0, path.lastIndexOf('/'));
 
-        console.log("directorioBase: " + directorioBase)
-        console.log("directorioFotos: " + directorioFotos)
+
+
+
 
         updateScene(directorioFotos, indiceActual);
     </script>
