@@ -41,65 +41,7 @@
         }
     </style>
 
-    <script>
-        function updateScene(directorioFotos, indiceActual) {
 
-            // clearTimeout(currentTimer)
-            var sky = document.getElementById('sky')
-
-            console.log("indiceActual: " + indiceActual)
-
-            pathFoto = `${directorioFotos}` + `${indiceActual}` + `.jpeg`
-            console.log("pathFoto: " + pathFoto)
-            sky.setAttribute("src", pathFoto)
-
-            var localindiceActual = indiceActual
-
-            //MENSAJE AL USUARIO EN LA PANTALLA
-            showMessage(localindiceActual);
-            currentTimer = setTimeout(() => { hideMessage(localindiceActual); }, 1);
-        }
-
-        function slideLeft() {
-            indiceActual = (indiceActual - 1 + 7) % 7;
-            updateScene();
-        }
-
-        function slideRight() {
-            indiceActual = (indiceActual + 1) % 7;
-            updateScene();
-        }
-
-        function showMessage() {
-            document.getElementById('message' + indiceActual).setAttribute('class', 'message show animated fadeOut')
-        }
-
-        function hideMessage() {
-            // document.getElementById('message' + indiceActual).setAttribute('class', 'hide')
-        }
-
-        var indiceActual = 1;
-        var isShowMessage = true;
-        var currentTimer = null;
-
-        // document.getElementById('left').onclick = slideLeft;
-        document.getElementById('left-overlay').onclick = slideLeft;
-
-        // document.getElementById('right').onclick = slideRight;
-        document.getElementById('right-overlay').onclick = slideRight;
-
-        //DIRECTORIO PADRE
-        var url = window.location.href;
-        var path = window.location.pathname;
-        var directorioBase = path.substring(0, path.lastIndexOf('/'));
-        console.log("directorioBase: " + directorioBase)
-
-        //DIRECTORIOS DE FOTOS
-        directorioFotos = `${directorioBase}` + `/fotos/madrid/`
-        console.log("directorioFotos: " + directorioFotos)
-
-        updateScene(directorioFotos, indiceActual);
-    </script>
 
 </head>
 
@@ -209,6 +151,69 @@
     <div id="message6" class="message hide">
         <p>Foto 6</p>
     </div>
+
+
+
+    <script>
+        function updateScene(directorioFotos, indiceActual) {
+
+            // clearTimeout(currentTimer)
+            var sky = document.getElementById('sky')
+
+            console.log("indiceActual: " + indiceActual)
+
+            pathFoto = `${directorioFotos}` + `${indiceActual}` + `.jpeg`
+            console.log("pathFoto: " + pathFoto)
+            sky.setAttribute("src", pathFoto)
+
+            var localindiceActual = indiceActual
+
+            //MENSAJE AL USUARIO EN LA PANTALLA
+            showMessage(localindiceActual);
+            currentTimer = setTimeout(() => { hideMessage(localindiceActual); }, 1);
+        }
+
+        function slideLeft() {
+            indiceActual = (indiceActual - 1 + 7) % 7;
+            updateScene();
+        }
+
+        function slideRight() {
+            indiceActual = (indiceActual + 1) % 7;
+            updateScene();
+        }
+
+        function showMessage() {
+            document.getElementById('message' + indiceActual).setAttribute('class', 'message show animated fadeOut')
+        }
+
+        function hideMessage() {
+            // document.getElementById('message' + indiceActual).setAttribute('class', 'hide')
+        }
+
+        var indiceActual = 1;
+        var isShowMessage = true;
+        var currentTimer = null;
+
+        // document.getElementById('left').onclick = slideLeft;
+        document.getElementById('left-overlay').onclick = slideLeft;
+
+        // document.getElementById('right').onclick = slideRight;
+        document.getElementById('right-overlay').onclick = slideRight;
+
+        //DIRECTORIO PADRE
+        var url = window.location.href;
+        var path = window.location.pathname;
+        var directorioBase = path.substring(0, path.lastIndexOf('/'));
+        console.log("directorioBase: " + directorioBase)
+
+        //DIRECTORIOS DE FOTOS
+        directorioFotos = `${directorioBase}` + `/fotos/madrid/`
+        console.log("directorioFotos: " + directorioFotos)
+
+        updateScene(directorioFotos, indiceActual);
+    </script>
+
 
 </body>
 
