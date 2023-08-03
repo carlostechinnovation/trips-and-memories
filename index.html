@@ -156,18 +156,14 @@
         var isShowMessage = true;
         var currentTimer = null;
 
-        function updateScene(pathFoto) {
-
-            var url = window.location.href;
-            var path = window.location.pathname;
-            var directorioBase = path.substring(0, path.lastIndexOf('/'));
-            console.log("directorioBase: " + directorioBase)
+        function updateScene(directorioFotos) {
 
             // clearTimeout(currentTimer)
             var sky = document.getElementById('sky')
-            pathFoto = `${directorioBase}` + `/fotos/madrid/` + `${indiceActual}` + `.jpeg`
 
             console.log("indiceActual: " + indiceActual)
+
+            pathFoto = `${directorioFotos}` + `${indiceActual}` + `.jpeg`
             console.log("pathFoto: " + pathFoto)
             sky.setAttribute("src", pathFoto)
             // console.log(sky)
@@ -200,7 +196,17 @@
         // document.getElementById('right').onclick = slideRight;
         document.getElementById('right-overlay').onclick = slideRight;
 
-        updateScene();
+        //DIRECTORIO PADRE
+        var url = window.location.href;
+        var path = window.location.pathname;
+        var directorioBase = path.substring(0, path.lastIndexOf('/'));
+        console.log("directorioBase: " + directorioBase)
+
+        //DIRECTORIOS DE FOTOS
+        directorioFotos = `${directorioBase}` + `/fotos/madrid/` + `${indiceActual}` + `.jpeg`
+        console.log("directorioFotos: " + directorioFotos)
+
+        updateScene(directorioFotos);
     </script>
 </body>
 
